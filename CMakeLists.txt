@@ -13,7 +13,6 @@ foreach(src_file IN LISTS src_files)
     add_executable("${target}" "${src_file}")
 endforeach()
 
-
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 include(CPack)

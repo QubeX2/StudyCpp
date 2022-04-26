@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/mikael/Projects/c++/StudyCpp/build",
+  "command": "/usr/bin/g++-11    -g   -std=gnu++2a -o CMakeFiles/chapter1.dir/src/chapter1.cpp.o -c /home/mikael/Projects/c++/StudyCpp/src/chapter1.cpp",
+  "file": "/home/mikael/Projects/c++/StudyCpp/src/chapter1.cpp"
+}
+]

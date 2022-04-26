@@ -1,1 +1,0 @@
-/usr/bin/g++-11  -g  -rdynamic CMakeFiles/StudyCpp.dir/main.cpp.o  -o StudyCpp 

@@ -1,7 +1,41 @@
 #include <iostream>
 #include <limits>
+#include <vector>
 #include "format.hpp"
 
+
+struct Person 
+{
+    std::string fistName;
+    std::string lastName;
+    int age;
+    double length;
+};
+
+std::string getString1()
+{
+    return "this is string 1";
+}
+
+std::unique_ptr<std::string> getString2()
+{
+    return std::make_unique<std::string>("Mikael Andersson");
+}
+
+struct OddsAndEvens { std::vector<int> odds, evens; };
+
+OddsAndEvens separateVector(std::vector<int>& vec) 
+{
+    std::vector<int> odds, evens;
+    for(int i : vec) {
+        if(i % 2 == 1) {
+            odds.push_back(i);
+        } else {
+            evens.push_back(i);
+        }
+    }
+    return OddsAndEvens { .odds = odds, .evens = evens };
+}
 
 int main() {
     std::cout << std::format("Hi i had {} times", 219) << std::endl;
@@ -31,4 +65,37 @@ int main() {
         std::cout << std::format("number: {}\n", a);
     }
 
+    Person p {
+        .fistName = "Mikael",
+        .lastName = "Andersson",
+        .age = 52
+    };
+
+    p.length  = 1.82;
+    std::cout << std::format("Person: {}, {}, {}, {}\n", p.fistName, p.lastName, p.age, p.length);
+
+    std::cout << getString1() << std::endl;
+    std::cout << *getString2() << std::endl;
+
+    std::pair myPair { "Mikael", 52 };
+
+    const auto& [myName, myAge] = myPair;
+
+    std::cout << std::format("const reference: {}, {}\n", myName, myAge);
+
+    std::vector<int> vec1 {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+
+    // prefer to return object - triggers return value optimizations
+    OddsAndEvens oe = separateVector(vec1);
+    std::cout << "Evens: ";
+    for(int e : oe.evens) {
+        std::cout << e << " ";
+    }
+    std::cout << std::endl;
+
+    std:: cout << "Odds: ";
+    for(int o : oe.odds) {
+        std::cout << o << " ";
+    }
+    std::cout << std::endl;
 }

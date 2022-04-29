@@ -27,6 +27,11 @@ int main()
     // string literals
     auto string1 { "Mikael Andersson"s };
     std::cout << string1 << std::endl;
+    // numeric conversions
+    std::string num { " 12334"s };
+    size_t index {};
+    int value { std::stoi(num, &index) };
+    std::cout << std::format("numeric conversion: {}, index: {}\n", value, index);
 
 
 }

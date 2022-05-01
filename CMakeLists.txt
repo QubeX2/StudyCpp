@@ -7,11 +7,12 @@ include(CTest)
 enable_testing()
 
 set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_VERBOSE_MAKEFILE ON)
 
-# set(
-#   CMAKE_CXX_FLAGS
-#   "${CMAKE_CXX_FLAGS} -v -W -Wall -pedantic"
-# )
+set(
+   CMAKE_CXX_FLAGS
+   "${CMAKE_CXX_FLAGS} -O0 -W -Wall -Wextra -pedantic"
+)
 
 
 file(GLOB src_files "src/*.cpp")

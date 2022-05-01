@@ -32,6 +32,11 @@ int main()
     size_t index {};
     int value { std::stoi(num, &index) };
     std::cout << std::format("numeric conversion: {}, index: {}\n", value, index);
-
-
+    // format specifiers
+    int i = {42};
+    std::cout << std::format("|{:7}|\n", i);
+    std::cout << std::format("|{:<7}|\n", i);
+    std::cout << std::format("|{:_>7}|\n", i);
+    std::cout << std::format("|{:_^7}|\n", i);
+    
 }

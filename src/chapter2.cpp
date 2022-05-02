@@ -13,10 +13,13 @@ int main()
     // three way comparison
     std::string a { "12" };
     std::string b { "34" };
+
+#ifdef __linux__
     auto result { a <=> b };
     if(is_lt(result)) { std::cout << "less\n"; }
     if(is_gt(result)) { std::cout << "greater\n"; }
     if(is_eq(result)) { std::cout << "equal\n"; }
+#endif
     
     // string operations
     std::string str1 { "Hello!!" };

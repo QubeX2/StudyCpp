@@ -1,6 +1,7 @@
 #include <iostream>
 #include <limits>
 #include <vector>
+#include <array>
 #include "format.hpp"
 
 
@@ -55,7 +56,10 @@ int main() {
     std::cout << std::format("PII: {}\n", pii);
     
     // limits
+
+#ifdef __linux__
     std::cout << std::format("infinity: {}\n", std::numeric_limits<double>::infinity);
+#endif
     std::array arr {1, 2, 3, 4, 5, 6, 7 ,8};
     std::cout << std::format("array length: {}\n", arr.size());
     std::array arr2 {10, 11, 12};

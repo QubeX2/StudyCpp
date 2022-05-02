@@ -26,6 +26,8 @@ std::unique_ptr<int> createInt()
 //
 int main()
 {
+    // never use auto_ptr
+
     // use only smart pointers RAII
     // the default pointer should be "unique_ptr"
     auto uptr { std::make_unique<int>(12) };

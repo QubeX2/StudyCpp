@@ -48,22 +48,27 @@ int main() {
     std::cout << std::format("Max int: {}\n", std::numeric_limits<int>::max());
     std::cout << std::format("Min int: {}\n", std::numeric_limits<int>::min());
     std::cout << std::format("Max long long: {}\n", std::numeric_limits<long long>::max());
+    
     // static cast
     float pi = 3.14f;
     int pii = static_cast<int>(pi);
     std::cout << std::format("PII: {}\n", pii);
+    
     // limits
     std::cout << std::format("infinity: {}\n", std::numeric_limits<double>::infinity);
     std::array arr {1, 2, 3, 4, 5, 6, 7 ,8};
     std::cout << std::format("array length: {}\n", arr.size());
     std::array arr2 {10, 11, 12};
+    
     // structured bindings
     auto [x, y, z] { arr2 };
     std::cout << std::format("x: {}, y: {}, z: {}\n", x, y, z);
+    
     // initialized loop
     for(std::array an {1, 2, 3, 4, 5, 6, 7, 8}; auto a : an) {
         std::cout << std::format("number: {}\n", a);
     }
+    
     // designated initializers
     Person p {
         .fistName = "Mikael",
@@ -72,13 +77,16 @@ int main() {
     };
     p.length  = 1.82;
     std::cout << std::format("Person: {}, {}, {}, {}\n", p.fistName, p.lastName, p.age, p.length);
+    
     // pointer
     std::cout << getString1() << std::endl;
     std::cout << *getString2() << std::endl;
+    
     // structured bindings
     std::pair myPair { "Mikael", 52 };
     const auto& [myName, myAge] = myPair;
     std::cout << std::format("const reference: {}, {}\n", myName, myAge);
+    
     // prefer to return object - triggers return value optimizations
     std::vector<int> vec1 {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     OddsAndEvens oe = separateVector(vec1);
@@ -92,6 +100,7 @@ int main() {
         std::cout << o << " ";
     }
     std::cout << std::endl;
+    
     // decltype
     decltype(foo()) s { foo() };
     std::cout << s << std::endl;

@@ -11,7 +11,7 @@ set(CMAKE_VERBOSE_MAKEFILE ON)
 
 set(
    CMAKE_CXX_FLAGS
-   "${CMAKE_CXX_FLAGS} -O0 -W -Wall -Wextra -pedantic"
+   "${CMAKE_CXX_FLAGS} -std=c++20 -O0 -W -Wall -Wextra -pedantic"
 )
 
 

@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include "format.hpp"
 
 class Bar
 {
@@ -36,6 +36,18 @@ void printFoo(const Foo& f)
     std::cout << f.m_var << std::endl;
 }
 
+// lvalue reference
+void handleMessage(std::string& message)
+{
+    std::cout << std::format("lvalue reference: {}\n", message);
+} 
+
+// rvalue reference
+void handleMessage(std::string&& message)
+{
+    std::cout << std::format("rvalue reference: {}\n", message);
+}
+
 int main()
 {
     // use friends only when needed
@@ -48,4 +60,12 @@ int main()
 
     printFoo(f3);
 
+    std::string a { "Hello "};
+    std::string b { "World" };
+    handleMessage(a);
+    // an expression, creates a temporary rvalue
+    handleMessage(a + b);
+    // std::move casts the lvalue to an rvalue reference
+    handleMessage(std::move(b));
+    
 }

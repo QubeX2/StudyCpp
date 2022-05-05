@@ -1,4 +1,5 @@
 #include <iostream>
+#include <utility>
 #include "format.hpp"
 
 class Bar
@@ -48,6 +49,41 @@ void handleMessage(std::string&& message)
     std::cout << std::format("rvalue reference: {}\n", message);
 }
 
+class MoveClass
+{
+public:
+    MoveClass(std::string s) : m_string(s) {}
+    MoveClass(MoveClass&& src) noexcept : m_string(std::move(src.m_string)) 
+    {
+        std::cout << "Move Contructor\n";
+    }
+    MoveClass& operator=(MoveClass&& rhs) noexcept
+    {
+        m_string = std::move(rhs.m_string);
+        std::cout << "Move assigned\n";
+        return *this;
+    }
+    void print()
+    {
+        std::cout << std::format("String: {}\n", m_string);
+    }
+private:
+    std::string m_string;
+};
+
+class MutEx
+{
+private:
+    mutable int m_accessed {};
+    int m_data { 1337 };
+public:
+    int getData() const 
+    {   
+        m_accessed++; // is changable because of "mutable"
+        return m_data;
+    }
+};
+
 int main()
 {
     // use friends only when needed
@@ -67,5 +103,20 @@ int main()
     handleMessage(a + b);
     // std::move casts the lvalue to an rvalue reference
     handleMessage(std::move(b));
-    
+
+    MoveClass mc1 { "Hello" };
+    MoveClass mc2 { "World" };
+    MoveClass mc3 { "" };
+    mc3 = std::move(mc1);
+    mc3.print();
+    MoveClass mc4 = std::move(mc2);
+    mc4.print();
+    MoveClass mc5 { MoveClass("Big") };
+    mc5.print();
+
+    int xz = 22;
+    int yz = 11;
+    std::cout << std::format("before: {}, {}\n", xz, yz);
+    xz = std::exchange(yz, 22);
+    std::cout << std::format("after: {}, {}\n", xz, yz);    
 }

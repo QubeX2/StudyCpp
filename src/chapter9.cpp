@@ -84,6 +84,25 @@ public:
     }
 };
 
+class ConstClass
+{
+public:
+    ConstClass(std::string s) : m_text(s) {}
+    std::string& getText() 
+    { 
+        std::cout << "-- non const\n"; 
+        return const_cast<std::string&>(std::as_const(*this).m_text); 
+    }
+    const std::string& getText() const 
+    {
+        std::cout << "-- const\n"; 
+        return m_text; 
+    }
+
+private:
+    std::string m_text { "Hello World! "};
+};
+
 int main()
 {
     // use friends only when needed
@@ -118,5 +137,10 @@ int main()
     int yz = 11;
     std::cout << std::format("before: {}, {}\n", xz, yz);
     xz = std::exchange(yz, 22);
-    std::cout << std::format("after: {}, {}\n", xz, yz);    
+    std::cout << std::format("after: {}, {}\n", xz, yz);   
+
+    const ConstClass c1 { "Hello Const!" };
+    ConstClass c2 { "Hello Non Const" };
+    std::cout << c1.getText() << std::endl;
+    std::cout << c2.getText() << std::endl;
 }

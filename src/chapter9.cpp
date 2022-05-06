@@ -87,7 +87,7 @@ public:
 class ConstClass
 {
 public:
-    ConstClass(std::string s) : m_text(s) {}
+    ConstClass(std::string s) : m_text(std::move(s)) {}
     std::string& getText() 
     { 
         std::cout << "-- non const\n"; 
@@ -101,6 +101,18 @@ public:
 
 private:
     std::string m_text { "Hello World! "};
+};
+
+class DefaultArgs
+{
+public:
+    DefaultArgs(int x = 1, int y = 1, int z = 1) : m_x(x), m_y(y), m_z(z) {}
+    void print()
+    {
+        std::cout << std::format("{}, {}, {}\n", m_x, m_y, m_z);
+    }
+private:
+    int m_x, m_y, m_z;
 };
 
 int main()
@@ -132,15 +144,20 @@ int main()
     mc4.print();
     MoveClass mc5 { MoveClass("Big") };
     mc5.print();
-
+    
     int xz = 22;
     int yz = 11;
     std::cout << std::format("before: {}, {}\n", xz, yz);
     xz = std::exchange(yz, 22);
     std::cout << std::format("after: {}, {}\n", xz, yz);   
 
+    // overloading based on const
     const ConstClass c1 { "Hello Const!" };
     ConstClass c2 { "Hello Non Const" };
     std::cout << c1.getText() << std::endl;
     std::cout << c2.getText() << std::endl;
+
+    // default arguments
+    DefaultArgs da {3};
+    da.print();
 }
